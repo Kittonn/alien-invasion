@@ -1,0 +1,61 @@
+import pygame
+
+from support import import_folder
+
+
+class Tile(pygame.sprite.Sprite):
+  def __init__(self, size, x, y) -> None:
+    super().__init__()
+    self.image = pygame.Surface((size, size))
+    # self.image.fill('skyblue')
+    self.rect = self.image.get_rect(topleft=(x, y))
+
+  def update(self, x_shift) -> None:
+    self.rect.x += x_shift
+
+
+class StaticTile(Tile):
+  def __init__(self, size, x, y, surface) -> None:
+    super().__init__(size, x, y)
+    self.image = surface
+
+
+class Crate(StaticTile):
+  def __init__(self, size, x, y) -> None:
+    super().__init__(size, x, y, pygame.image.load(
+        "./assets/tiles/box.png").convert_alpha())
+
+
+class French(StaticTile):
+  def __init__(self, size, x, y, surface) -> None:
+    super().__init__(size, x, y, surface)
+
+
+class Coin(StaticTile):
+  def __init__(self, size, x, y, surface, value) -> None:
+    super().__init__(size, x, y, surface)
+    self.value = value
+
+
+class AnimatedTile(Tile):
+  def __init__(self, size, x, y, path) -> None:
+    super().__init__(size, x, y)
+    self.frames = import_folder(path)
+    self.frame_index = 0
+    self.image = self.frames[self.frame_index]
+
+  def animate(self) -> None:
+    self.frame_index += 0.15
+    if self.frame_index >= len(self.frames):
+      self.frame_index = 0
+    self.image = self.frames[int(self.frame_index)]
+
+  def update(self, shift) -> None:
+    self.animate()
+    self.rect.x += shift
+
+
+class Item(StaticTile):
+  def __init__(self, size, x, y, surface,id) -> None:
+    super().__init__(size, x - 100, y - 100, surface)
+    self.id = id
