@@ -82,7 +82,6 @@ class Overworld:
         self.current_level -= 1
         self.moving = True
       elif keys[pygame.K_ESCAPE]:
-        print("back to text input")
         self.get_status('input_box')
         keys = pygame.key.get_pressed()
       elif keys[pygame.K_SPACE]:
