@@ -127,10 +127,10 @@ class Menu:
     for data in main_menu_data:
       if(data == self.current_mode):
         name_text = get_font_surf(
-            'evil', 50, main_menu_data[data]['name'], 'red')
+            'evil', 50, main_menu_data[data]['name'], '#6a040f')
       else:
         name_text = get_font_surf(
-            'evil', 50, main_menu_data[data]['name'], 'black')
+            'evil', 50, main_menu_data[data]['name'], '#03071e')
 
       name_rect = name_text.get_rect(center=main_menu_data[data]['node_pos'])
       self.display_surface.blit(name_text, name_rect)

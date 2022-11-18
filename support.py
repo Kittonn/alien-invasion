@@ -3,7 +3,6 @@ from os import walk
 import pygame
 from setting import tile_size
 import json
-from typing import List
 import pygame
 
 

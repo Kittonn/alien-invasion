@@ -31,14 +31,21 @@ class GameOver:
     gameover_text_rect = gameover_text.get_rect(
         center=(screen_width / 2, 100))
 
-    score_text = get_font_surf('evil', 60, str(self.score), 'black')
-    name_text = get_font_surf('evil', 60, self.name, 'black')
+    score_text = get_font_surf('evil', 180, str(self.score), 'black')
+    name_text = get_font_surf('evil', 50, self.name, 'black')
 
-    score_text_rect = score_text.get_rect(center=(screen_width / 2, 300))
-    name_text_rect = name_text.get_rect(center=(screen_width / 2, 200))
+    score_text_rect = score_text.get_rect(center=(screen_width / 2, 280))
+    name_text_rect = name_text.get_rect(center=(screen_width / 2, 440))
     self.display_surface.blit(score_text, score_text_rect)
     self.display_surface.blit(name_text, name_text_rect)
     self.display_surface.blit(gameover_text, gameover_text_rect)
+
+    press_r_text = get_font_surf('evil', 30, "Press R to restart", 'black')
+    press_q_text = get_font_surf('evil', 30, "Press Q to quit", 'black')
+    press_r_text_rect = press_r_text.get_rect(center=(screen_width / 2 - 300, 540))
+    press_q_text_rect = press_q_text.get_rect(center=(screen_width / 2 + 300, 540))
+    self.display_surface.blit(press_r_text, press_r_text_rect)
+    self.display_surface.blit(press_q_text, press_q_text_rect)
 
 
 class Victory:
@@ -71,12 +78,19 @@ class Victory:
     victory_text_rect = victory_text.get_rect(
         center=(screen_width / 2, 100))
 
-    score_text = get_font_surf('evil', 60, str(self.score), 'black')
-    name_text = get_font_surf('evil', 60, self.name, 'black')
+    score_text = get_font_surf('evil', 180, str(self.score), 'black')
+    name_text = get_font_surf('evil', 50, self.name, 'black')
 
-    score_text_rect = score_text.get_rect(center=(screen_width / 2, 300))
-    name_text_rect = name_text.get_rect(center=(screen_width / 2, 200))
+    score_text_rect = score_text.get_rect(center=(screen_width / 2, 280))
+    name_text_rect = name_text.get_rect(center=(screen_width / 2, 440))
     self.display_surface.blit(score_text, score_text_rect)
     self.display_surface.blit(name_text, name_text_rect)
 
     self.display_surface.blit(victory_text, victory_text_rect)
+    
+    press_r_text = get_font_surf('evil', 30, "Press R to restart", 'black')
+    press_q_text = get_font_surf('evil', 30, "Press Q to quit", 'black')
+    press_r_text_rect = press_r_text.get_rect(center=(screen_width / 2 - 300, 540))
+    press_q_text_rect = press_q_text.get_rect(center=(screen_width / 2 + 300, 540))
+    self.display_surface.blit(press_r_text, press_r_text_rect)
+    self.display_surface.blit(press_q_text, press_q_text_rect)

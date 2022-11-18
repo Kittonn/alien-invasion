@@ -1,6 +1,5 @@
 from support import import_score_leaderboard
 import pygame
-import sys
 from setting import screen_width
 from support import get_font_surf
 

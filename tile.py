@@ -7,7 +7,6 @@ class Tile(pygame.sprite.Sprite):
   def __init__(self, size, x, y) -> None:
     super().__init__()
     self.image = pygame.Surface((size, size))
-    # self.image.fill('skyblue')
     self.rect = self.image.get_rect(topleft=(x, y))
 
   def update(self, x_shift) -> None:
@@ -56,6 +55,11 @@ class AnimatedTile(Tile):
 
 
 class Item(StaticTile):
-  def __init__(self, size, x, y, surface,id) -> None:
+  def __init__(self, size, x, y, surface, id) -> None:
     super().__init__(size, x - 100, y - 100, surface)
     self.id = id
+
+
+class Block(StaticTile):
+  def __init__(self, size, x, y) -> None:
+    super().__init__(size, x, y, pygame.image.load("./assets/tiles/block.png").convert_alpha())

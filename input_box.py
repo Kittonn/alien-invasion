@@ -1,7 +1,6 @@
 import pygame
 from support import get_font_surf
 from setting import screen_width
-import sys
 
 
 class TextInputBox(pygame.sprite.Sprite):
@@ -55,7 +54,7 @@ class InputName:
     self.get_status = get_status
 
     self.text_input_box = TextInputBox(
-        (screen_width / 2, 350), 350, self.display_surface, current_mode, self.create_main_menu)
+        (screen_width / 2, 550), 350, self.display_surface, current_mode, self.create_main_menu)
     self.text_group = pygame.sprite.Group(self.text_input_box)
 
   def input(self) -> None:
@@ -64,14 +63,19 @@ class InputName:
       self.create_main_menu(self.current_mode)
 
     elif keys[pygame.K_RETURN] and self.text_input_box.text != '':
-      self.get_status("select_level",self.text_input_box.text)
+      self.get_status("select_level", self.text_input_box.text)
       keys = pygame.key.get_pressed()
-
-
 
   def run(self, event_list) -> None:
     background = pygame.image.load("./assets/Background.png")
     self.display_surface.blit(background, (0, 0))
+
+    player_image = pygame.image.load("./assets/p1_front.png")
+    player_image = pygame.transform.scale(
+        player_image, (player_image.get_width() * 3, player_image.get_height() * 3))
+    player_image_rect = player_image.get_rect(center=(screen_width / 2, 330))
+    self.display_surface.blit(player_image, player_image_rect)
+
     name_text = get_font_surf('evil', 60, "Enter Your Name", 'black')
     name_text_rect = name_text.get_rect(center=(screen_width / 2, 100))
     self.display_surface.blit(name_text, name_text_rect)

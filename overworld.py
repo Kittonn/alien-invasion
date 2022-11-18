@@ -6,13 +6,13 @@ from decoration import Background
 
 
 class Node(pygame.sprite.Sprite):
-  def __init__(self, pos, status, icon_speed):
+  def __init__(self, pos, status, icon_speed,index):
     super().__init__()
-    self.image = pygame.Surface((120, 80))
-    if status == 'available':
-      self.image.fill("red")
-    else:
-      self.image.fill("green")
+    self.image = pygame.image.load(f"./assets/node/level_{index}.png").convert_alpha()
+    if status == 'locked':
+      self.locked_image = self.image.copy()
+      self.locked_image.fill('black',None,pygame.BLEND_RGBA_MULT)
+      self.image.blit(self.locked_image,(0,0))
     self.rect = self.image.get_rect(center=pos)
 
     self.detection_zone = pygame.Rect(self.rect.centerx - (
@@ -54,9 +54,9 @@ class Overworld:
     self.nodes = pygame.sprite.Group()
     for index, node_data in enumerate(levels.values()):
       if index <= self.max_level:
-        node_sprite = Node(node_data['node_pos'], 'available', self.speed)
+        node_sprite = Node(node_data['node_pos'], 'available', self.speed,index)
       else:
-        node_sprite = Node(node_data['node_pos'], 'locked', self.speed)
+        node_sprite = Node(node_data['node_pos'], 'locked', self.speed,index)
       self.nodes.add(node_sprite)
 
   def draw_paths(self):
@@ -116,6 +116,6 @@ class Overworld:
     self.input()
     self.update_icon_pos()
     self.icon.update()
-    self.nodes.draw(self.display_surface)
     self.draw_paths()
+    self.nodes.draw(self.display_surface)
     self.icon.draw(self.display_surface)

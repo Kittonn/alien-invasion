@@ -23,3 +23,6 @@ main_menu_data = {
     },
 
 }
+
+
+game_pause = False

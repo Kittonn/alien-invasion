@@ -1,5 +1,5 @@
 import pygame
-from tile import Tile, StaticTile, Crate, Coin, French, Item
+from tile import Tile, StaticTile, Crate, Coin, French, Item, Block
 from decoration import Background, Water
 from setting import tile_size, screen_width, screen_height
 from player import Player
@@ -17,6 +17,9 @@ class Level:
 
     self.create_overworld = create_overworld
     self.current_level = current_level
+
+    self.collect_coin_sound = pygame.mixer.Sound("./audio/collect_coin.wav")
+    self.collect_item_sound = pygame.mixer.Sound("./audio/collect_item.wav")
 
     level_data = levels[self.current_level]
 
@@ -49,6 +52,9 @@ class Level:
     french_layout = import_csv_layout(level_data['french'])
     self.french_sprites = self.create_tile_group(french_layout, 'french')
 
+    block_layout = import_csv_layout(level_data['block'])
+    self.block_sprites = self.create_tile_group(block_layout, 'block')
+
     self.item_sprites = pygame.sprite.Group()
 
     self.background = pygame.sprite.GroupSingle(Background())
@@ -73,6 +79,7 @@ class Level:
     collied_coins = pygame.sprite.spritecollide(
         self.player.sprite, self.coin_sprites, True)
     if collied_coins:
+      self.collect_coin_sound.play()
       for coin in collied_coins:
         self.change_coins(coin.value)
 
@@ -102,6 +109,7 @@ class Level:
         self.player.sprite, self.item_sprites, True)
 
     if item_collisions:
+      self.collect_item_sound.play()
       for item in item_collisions:
         if item.id != 1:
           self.change_coins(2+item.id)
@@ -147,6 +155,9 @@ class Level:
             french_surface = terrain_tile_list[int(val)]
             sprite = French(tile_size, x, y, french_surface)
 
+          if type == 'block':
+            sprite = Block(tile_size, x, y)
+
           sprite_group.add(sprite)
     return sprite_group
 
@@ -164,6 +175,17 @@ class Level:
           sprite = StaticTile(tile_size, x, y, goal_surface)
           self.goal.add(sprite)
 
+  def block_movement_collision(self):
+    block_collisions = pygame.sprite.spritecollide(
+        self.player.sprite, self.block_sprites, False)
+    if block_collisions:
+      for block in block_collisions:
+        if block.rect.colliderect(self.player.sprite.rect):
+          if self.player.sprite.direction.x < 0:
+            self.player.sprite.rect.left = block.rect.right
+
+          elif self.player.sprite.direction.x > 0:
+            self.player.sprite.rect.right = block.rect.left
 
   def horizontal_movement_collision(self):
     player = self.player.sprite
@@ -207,7 +229,7 @@ class Level:
       player.on_ground = False
     if player.on_ceiling and player.direction.y > 0:
       player.on_ceiling = False
-  
+
   def scroll_x(self):
     player = self.player.sprite
     player_x = player.rect.centerx
@@ -222,7 +244,7 @@ class Level:
     else:
       self.world_shift = 0
       player.speed = 8
-      
+
   def enemy_collision_reverse(self):
     for enemy in self.enemy_sprites.sprites():
       if pygame.sprite.spritecollide(enemy, self.constant_sprites, False):
@@ -268,8 +290,11 @@ class Level:
     self.check_coin_collision()
     self.check_enemy_collision()
     self.check_item_collision()
+    self.block_movement_collision()
 
     self.item_sprites.update(self.world_shift)
     self.item_sprites.draw(self.display_surface)
 
     self.player.draw(self.display_surface)
+    self.block_sprites.update(self.world_shift)
+    self.block_sprites.draw(self.display_surface)

@@ -73,7 +73,7 @@ class Game:
       elif self.status == 'select_level':
         self.select_level.run(self.name)
       elif self.status == 'how_to_play':
-        self.how_to_play.run()
+        self.how_to_play.run()  
 
       pygame.display.update()
       self.clock.tick(60)
