@@ -6,7 +6,7 @@ from game_end import GameOver, Victory
 
 
 class SelectLevel:
-  def __init__(self, surface, get_status,create_main_menu) -> None:
+  def __init__(self, surface, get_status, create_main_menu) -> None:
     self.display_surface = surface
     self.status = 'overworld'
 
@@ -18,10 +18,16 @@ class SelectLevel:
     self.current_health = 100
     self.coins = 0
 
+    self.level_sound = pygame.mixer.Sound("./audio/level_music.wav")
+    self.overworld_sound = pygame.mixer.Sound("./audio/overworld_music.wav")
+    
+    self.level_sound.set_volume(0.2)
+    self.overworld_sound.set_volume(0.2)
+
     self.max_level = 0
     self.overworld = Overworld(
         0, self.max_level, self.display_surface, self.create_level, self.check_game_start, self.get_status)
-
+    self.overworld_sound.play(loops=-1)
     self.water_collide = False
     self.game_start = False
 
@@ -31,10 +37,14 @@ class SelectLevel:
     self.level = Level(current_level, self.display_surface,
                        self.create_overworld, self.change_coins, self.change_health, self.check_water_collision)
     self.status = 'level'
+    self.overworld_sound.stop()
+    self.level_sound.play(loops=-1)
 
   def create_overworld(self, current_level, new_max_level) -> None:
     if new_max_level > self.max_level:
       self.max_level = new_max_level
+    self.level_sound.stop()
+    self.overworld_sound.play(loops=-1)
     self.overworld = Overworld(current_level, self.max_level,
                                self.display_surface, self.create_level, self.check_game_start, self.get_status)
     self.status = 'overworld'
@@ -60,24 +70,27 @@ class SelectLevel:
           self.display_surface, self.coins, self.change_status, self.create_main_menu)
       self.coins = 0
       self.max_level = 0
+      self.overworld_sound.play(loops=-1)
       self.water_collide = False
       self.overworld = Overworld(
           0, self.max_level, self.display_surface, self.create_level, self.check_game_start, self.get_status)
       self.status = 'game_over'
       self.game_start = False
+      self.level_sound.stop()
       # self.status = 'overworld'
 
   def check_game_victory(self):
     if self.level.goal_collide and self.overworld.current_level == 5:
       self.current_health = 100
+      self.overworld_sound.play(loops=-1)
       self.victory = Victory(self.display_surface,
                              self.coins, self.change_status, self.create_main_menu)
       self.max_level = 0
+      self.level_sound.stop()
       self.overworld = Overworld(
           0, self.max_level, self.display_surface, self.create_level, self.check_game_start, self.get_status)
       self.status = 'victory'
       self.coins = 0
-
 
   def check_game_start(self, start):
     self.game_start = start
@@ -87,6 +100,8 @@ class SelectLevel:
     keys = pygame.key.get_pressed()
     if keys[pygame.K_ESCAPE] and not self.game_start:
       self.get_status('input_box')
+    # if keys[pygame.K_q] and self.status =='level':
+    #   print("click")
 
   def run(self, name) -> None:
 

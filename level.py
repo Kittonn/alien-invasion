@@ -20,6 +20,12 @@ class Level:
 
     self.collect_coin_sound = pygame.mixer.Sound("./audio/collect_coin.wav")
     self.collect_item_sound = pygame.mixer.Sound("./audio/collect_item.wav")
+    self.player_hit_sound = pygame.mixer.Sound("./audio/player_hit.wav")
+    self.enemy_hit_sound = pygame.mixer.Sound("./audio/enemy_hit.wav")
+    
+    self.time_enemy_hit_play = 0
+    
+
 
     level_data = levels[self.current_level]
 
@@ -93,6 +99,7 @@ class Level:
         enemy_top = enemy.rect.top
         player_bottom = self.player.sprite.rect.bottom
         if enemy_top < player_bottom < enemy_center and self.player.sprite.direction.y >= 1:
+          self.player_hit_sound.play()
           self.player.sprite.direction.y = -15
           random_item = randint(0, 4)
           random_create = randint(0, 1)
@@ -101,6 +108,9 @@ class Level:
                                        pygame.image.load(items[random_item]['path']).convert_alpha(), items[random_item]['id']))
           enemy.kill()
         else:
+          if pygame.time.get_ticks() - self.time_enemy_hit_play > 2000:
+            self.enemy_hit_sound.play()
+            self.time_enemy_hit_play = pygame.time.get_ticks()
           self.player.sprite.get_damage()
           self.enemy_collide_time = pygame.time.get_ticks()
 
@@ -245,12 +255,18 @@ class Level:
       self.world_shift = 0
       player.speed = 8
 
+  def input(self):
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_q]:
+      self.create_overworld(self.current_level, self.current_level)
+
   def enemy_collision_reverse(self):
     for enemy in self.enemy_sprites.sprites():
       if pygame.sprite.spritecollide(enemy, self.constant_sprites, False):
         enemy.reverse()
 
   def run(self, name):
+    self.input()
     self.background.draw(self.display_surface)
 
     self.water.draw(self.display_surface)
