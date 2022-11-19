@@ -107,7 +107,7 @@ class Menu:
         self.move_direction = pygame.math.Vector2(0, 0)
 
   def run(self) -> None:
-    background = pygame.image.load("./assets/Background.png")
+    background = pygame.image.load("graphics/Background.png")
     self.display_surface.blit(background, (0, 0))
 
     name_text = get_font_surf('evil', 90, 'Alien Invasion', 'black')

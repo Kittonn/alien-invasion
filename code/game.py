@@ -14,7 +14,7 @@ class Game:
     screen = pygame.display.set_mode((screen_width, screen_height))
     self.display_surface = screen
     pygame.display.set_caption("Alien Invasion")
-    pygame.display.set_icon(pygame.image.load('./assets/icon.png'))
+    pygame.display.set_icon(pygame.image.load('graphics/icon.png'))
     self.clock = pygame.time.Clock()
 
     self.status = 'main_menu'

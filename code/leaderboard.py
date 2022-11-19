@@ -7,7 +7,7 @@ from support import get_font_surf
 class Leaderboard:
   def __init__(self, surface, current_mode, create_main_menu) -> None:
     self.display_surface = surface
-    self.data = import_score_leaderboard("./score.json")
+    self.data = import_score_leaderboard("data/score.json")
 
     self.current_mode = current_mode
 
@@ -19,7 +19,7 @@ class Leaderboard:
       self.create_main_menu(self.current_mode)
 
   def run(self) -> None:
-    background = pygame.image.load("./assets/Background.png")
+    background = pygame.image.load("graphics/Background.png")
     self.display_surface.blit(background, (0, 0))
 
     self.input()

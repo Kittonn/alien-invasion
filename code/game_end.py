@@ -21,7 +21,7 @@ class GameOver:
 
   def run(self, name) -> None:
     self.name = name
-    background = pygame.image.load("./assets/Background.png")
+    background = pygame.image.load("graphics/Background.png")
     self.display_surface.blit(background, (0, 0))
 
     self.input()
@@ -59,18 +59,18 @@ class Victory:
     keys = pygame.key.get_pressed()
     if keys[pygame.K_r]:
       write_score_leaderboard(
-          {"name": self.name, "score": self.score}, "./score.json")
+          {"name": self.name, "score": self.score}, "data/score.json")
       self.change_status('overworld')
     elif keys[pygame.K_q]:
       write_score_leaderboard(
-          {"name": self.name, "score": self.score}, "./score.json")
+          {"name": self.name, "score": self.score}, "data/score.json")
       self.create_main_menu(0)
       self.change_status('overworld')
 
   def run(self, name):
     self.input()
     self.name = name
-    background = pygame.image.load("./assets/Background.png")
+    background = pygame.image.load("graphics/Background.png")
     self.display_surface.blit(background, (0, 0))
 
     victory_text = get_font_surf(

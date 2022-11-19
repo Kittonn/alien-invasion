@@ -147,7 +147,7 @@ class Level:
 
           if type == 'coin':
             terrain_tile_list = import_cut_graphics(
-                "./assets/tiles/coin_tiles.png")
+                "graphics/tiles/coin_tiles.png")
             coin_random = randint(0, 2)
             coin_surface = terrain_tile_list[coin_random]
             sprite = Coin(tile_size, x, y, coin_surface, coin_random + 1)
@@ -161,7 +161,7 @@ class Level:
 
           if type == 'french':
             terrain_tile_list = import_cut_graphics(
-                "./assets/tiles/french_tiles.png")
+                "graphics/tiles/french_tiles.png")
             french_surface = terrain_tile_list[int(val)]
             sprite = French(tile_size, x, y, french_surface)
 
@@ -181,7 +181,7 @@ class Level:
           self.player.add(sprite)
         if val == '1':
           goal_surface = pygame.image.load(
-              "./assets/tiles/goal.png").convert_alpha()
+              "graphics/tiles/goal.png").convert_alpha()
           sprite = StaticTile(tile_size, x, y, goal_surface)
           self.goal.add(sprite)
 

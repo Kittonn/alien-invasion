@@ -46,7 +46,7 @@ def import_cut_graphics(path):
 
 
 def get_font_surf(type, size, text, color):
-  path = "./assets/font/"
+  path = "fonts/"
   font_path = {
       'chakra_petch': 'Chakrapetch/ChakraPetch-SemiBold.ttf',
       'hacked': 'Hacked/Hacked-KerX.ttf',

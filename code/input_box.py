@@ -11,7 +11,7 @@ class TextInputBox(pygame.sprite.Sprite):
     self.width = width
     self.active = False
     self.text = ""
-    self.font = pygame.font.Font("./assets/font/Evil/EvilEmpire-4BBVK.ttf", 35)
+    self.font = pygame.font.Font("fonts/Evil/EvilEmpire-4BBVK.ttf", 35)
     self.backcolor = None
 
     self.current_mode = current_mode
@@ -67,10 +67,10 @@ class InputName:
       keys = pygame.key.get_pressed()
 
   def run(self, event_list) -> None:
-    background = pygame.image.load("./assets/Background.png")
+    background = pygame.image.load("graphics/Background.png")
     self.display_surface.blit(background, (0, 0))
 
-    player_image = pygame.image.load("./assets/p1_front.png")
+    player_image = pygame.image.load("graphics/p1_front.png")
     player_image = pygame.transform.scale(
         player_image, (player_image.get_width() * 3, player_image.get_height() * 3))
     player_image_rect = player_image.get_rect(center=(screen_width / 2, 330))

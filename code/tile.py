@@ -22,7 +22,7 @@ class StaticTile(Tile):
 class Crate(StaticTile):
   def __init__(self, size, x, y) -> None:
     super().__init__(size, x, y, pygame.image.load(
-        "./assets/tiles/box.png").convert_alpha())
+        "graphics/tiles/box.png").convert_alpha())
 
 
 class French(StaticTile):
@@ -62,4 +62,4 @@ class Item(StaticTile):
 
 class Block(StaticTile):
   def __init__(self, size, x, y) -> None:
-    super().__init__(size, x, y, pygame.image.load("./assets/tiles/block.png").convert_alpha())
+    super().__init__(size, x, y, pygame.image.load("graphics/tiles/block.png").convert_alpha())

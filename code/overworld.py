@@ -8,7 +8,7 @@ from decoration import Background
 class Node(pygame.sprite.Sprite):
   def __init__(self, pos, status, icon_speed,index):
     super().__init__()
-    self.image = pygame.image.load(f"./assets/node/level_{index}.png").convert_alpha()
+    self.image = pygame.image.load(f"graphics/node/level_{index}.png").convert_alpha()
     if status == 'locked':
       self.locked_image = self.image.copy()
       self.locked_image.fill('black',None,pygame.BLEND_RGBA_MULT)
@@ -23,7 +23,7 @@ class Icon(pygame.sprite.Sprite):
   def __init__(self, pos):
     super().__init__()
     self.pos = pos
-    self.image = pygame.image.load("./assets/node/node-icon.png")
+    self.image = pygame.image.load("graphics/node/node-icon.png")
     self.rect = self.image.get_rect(center=pos)
 
   def update(self):

@@ -12,7 +12,7 @@ class UI:
     self.bar_max_width = 152
     self.bar_height = 20
 
-    self.coin = pygame.image.load("./assets/tiles/coin_gold.png")
+    self.coin = pygame.image.load("graphics/tiles/coin_gold.png")
     self.coin_rect = self.coin.get_rect(topleft=(5, 20))
 
   def show_health(self, current, full):

@@ -17,7 +17,7 @@ class HowToPlay:
   def run(self) -> None:
     self.input()
     
-    background = pygame.image.load("./assets/Background.png")
+    background = pygame.image.load("graphics/Background.png")
     self.display_surface.blit(background, (0, 0))
     
     howtoplay_text = get_font_surf(
