@@ -5,7 +5,7 @@ from setting import tile_size, screen_width, screen_height
 from player import Player
 from support import import_csv_layout, import_cut_graphics, get_font_surf
 from enemy import Enemy
-from game_data import levels, graphic_tiles, items
+from game_data import levels, graphic_tiles, items, times
 from random import randint
 
 
@@ -22,10 +22,13 @@ class Level:
     self.collect_item_sound = pygame.mixer.Sound("./audio/collect_item.wav")
     self.player_hit_sound = pygame.mixer.Sound("./audio/player_hit.wav")
     self.enemy_hit_sound = pygame.mixer.Sound("./audio/enemy_hit.wav")
-    
-    self.time_enemy_hit_play = 0
-    
 
+    self.collect_coin_sound.set_volume(0.5)
+    self.collect_item_sound.set_volume(0.5)
+    self.player_hit_sound.set_volume(0.5)
+    self.enemy_hit_sound.set_volume(0.5)
+
+    self.time_enemy_hit_play = 0
 
     level_data = levels[self.current_level]
 
@@ -68,6 +71,11 @@ class Level:
     self.enemy_collide_time = 0
 
     self.water = Water()
+    
+    
+    
+  def count_down_time(self):
+    pass
 
   def check_win(self):
     if pygame.sprite.spritecollide(self.player.sprite, self.goal, False):
@@ -154,7 +162,7 @@ class Level:
 
           if type == 'enemy':
             random_id = randint(1, 2)
-            sprite = Enemy(tile_size, x, y, random_id)
+            sprite = Enemy(tile_size, x, y, random_id,self.current_level)
 
           if type == 'constant':
             sprite = Tile(tile_size, x, y)
@@ -314,3 +322,5 @@ class Level:
     self.player.draw(self.display_surface)
     self.block_sprites.update(self.world_shift)
     self.block_sprites.draw(self.display_surface)
+    
+    self.count_down_time()

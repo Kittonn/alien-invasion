@@ -30,7 +30,7 @@ class Player(pygame.sprite.Sprite):
 
   def import_character_assets(self) -> None:
     character_path = "graphics/character/"
-    self.animations = {'idle': [], 'run': [], 'jump': [], 'fall': []}
+    self.animations = {'idle': [], 'run': [], 'jump': [], 'fall': [], 'damage': []}
 
     for animation in self.animations.keys():
       full_path = character_path + animation
@@ -79,7 +79,9 @@ class Player(pygame.sprite.Sprite):
       self.jump()
 
   def get_status(self) -> None:
-    if self.direction.y < 0:
+    if self.invincible:
+      self.status = 'damage'
+    elif self.direction.y < 0:
       self.status = 'jump'
     elif self.direction.y > 1:
       self.status = 'fall'
