@@ -7,6 +7,23 @@ Project รายวิชา Programming Fundamental (01076103) คณะวิ
 
 > Requirement Project : [PDF](https://drive.google.com/file/d/1pL9t5g7KrUIF_P2ntQXdA4N1k7gRrGEd/view)
 
+### Development 
+
+ > Run Game
+```py
+python -m venv env
+env\scripts\activate
+pip install -r requirements.txt
+python code/main.py
+```
+
+> Count lines of code
+
+```py
+cd code
+pygount --format=summary --suffix=py .
+```
+
 ### Requirement
 
 - [x] มีการแสดงรายละเอียด ชื่อ-นามสกุล และรหัสนักศึกษาบนจอภาพ
@@ -23,3 +40,4 @@ Project รายวิชา Programming Fundamental (01076103) คณะวิ
 - [x] ความท้าทายในเกมส์ต้องค่อยเป็นค่อยไป ไม่ยากจนผู้เล่นไม่สามารถเล่นจนจบเกมส์ได้และรางวัลกับ
 ความท้าทายจะต้องสอดคล้องกัน
 - [x] เป็นเกมส์เดี่ยว ไม่ใช่การรวมเกมส์หลายๆ เกมส์เข้าด้วยกันเป็นชุด
+
