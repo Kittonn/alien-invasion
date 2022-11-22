@@ -5,7 +5,7 @@ from setting import tile_size, screen_width, screen_height
 from player import Player
 from support import import_csv_layout, import_cut_graphics, get_font_surf
 from enemy import Enemy
-from game_data import levels, graphic_tiles, items, times
+from game_data import levels, graphic_tiles, items
 from random import randint
 
 

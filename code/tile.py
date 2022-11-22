@@ -56,7 +56,7 @@ class AnimatedTile(Tile):
 
 class Item(StaticTile):
   def __init__(self, size, x, y, surface, id) -> None:
-    super().__init__(size, x - 100, y - 100, surface)
+    super().__init__(size, x + 100, y - 100, surface)
     self.id = id
 
 
