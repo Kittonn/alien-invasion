@@ -5,7 +5,7 @@ from setting import tile_size, screen_width, screen_height
 from player import Player
 from support import import_csv_layout, import_cut_graphics, get_font_surf
 from enemy import Enemy
-from game_data import levels, graphic_tiles, items
+from game_data import levels, graphic_tiles, items, times
 from random import randint
 
 
@@ -72,10 +72,20 @@ class Level:
 
     self.water = Water()
     
+    self.countdown_time = times[self.current_level]
+    
     
     
   def count_down_time(self):
-    pass
+    if self.countdown_time > 0:
+      self.countdown_time -= 1/60
+    else:
+      self.countdown_time = 60
+      self.check_water_collision(True)
+    
+    self.time_text = get_font_surf('evil',40, str(int(self.countdown_time)), 'black')
+    self.time_text_rect = self.time_text.get_rect(center=(screen_width/2, 50))
+    self.display_surface.blit(self.time_text, self.time_text_rect)
 
   def check_win(self):
     if pygame.sprite.spritecollide(self.player.sprite, self.goal, False):

@@ -13,7 +13,7 @@ main_menu_data = {
         "name": "Leaderboard",
         "node_pos": (screen_width / 2, 410)
     },
-    3: {
+    2: {
         "name": "Quit",
         "node_pos": (screen_width / 2, 560)
     },

@@ -12,7 +12,7 @@ Project รายวิชา Programming Fundamental (01076103) คณะวิ
  > Run Game
 ```py
 python -m venv env
-env\scripts\activate
+env/scripts/activate
 pip install -r requirements.txt
 python code/main.py
 ```

@@ -67,23 +67,23 @@ class Menu:
   def input(self) -> None:
     keys = pygame.key.get_pressed()
     if not self.moving:
-      if(keys[pygame.K_w]) and self.current_mode > 0:
+      if (keys[pygame.K_w]) and self.current_mode > 0:
         self.move_direction = self.get_movement_data('previous')
         self.current_mode -= 1
         self.moving = True
-      elif(keys[pygame.K_s]) and self.current_mode < self.max_mode - 1:
+      elif (keys[pygame.K_s]) and self.current_mode < self.max_mode - 1:
         self.move_direction = self.get_movement_data('next')
         self.current_mode += 1
         self.moving = True
-      elif(keys[pygame.K_SPACE]):
+      elif (keys[pygame.K_SPACE]):
         if self.current_mode == 0:
           self.create_input_box(self.current_mode)
           keys = pygame.key.get_pressed()
         elif self.current_mode == 1:
           self.create_leaderboard(self.current_mode)
+        # elif self.current_mode == 2:
+        #   self.create_how_to_play(self.current_mode)
         elif self.current_mode == 2:
-          self.create_how_to_play(self.current_mode)
-        elif self.current_mode == 3:
           pygame.quit()
           sys.exit()
 
@@ -125,7 +125,7 @@ class Menu:
     # self.icon.draw(self.display_surface)
 
     for data in main_menu_data:
-      if(data == self.current_mode):
+      if (data == self.current_mode):
         name_text = get_font_surf(
             'evil', 50, main_menu_data[data]['name'], '#6a040f')
       else:

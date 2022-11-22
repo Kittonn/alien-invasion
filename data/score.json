@@ -1,70 +1,26 @@
 [
   {
-    "name": "John Doe",
+    "name": "A",
     "score": 10
   },
   {
-    "name": "Jane Job",
+    "name": "B",
     "score": 20
   },
   {
-    "name": "John Smith",
+    "name": "C",
     "score": 30
   },
   {
-    "name": "Jane Han",
-    "score": 40
+    "name": "D",
+    "score": 45
   },
   {
-    "name": "John jadd",
+    "name": "E",
     "score": 50
   },
   {
-    "name": "K1ttonn",
-    "score": 1000
-  },
-  {
-    "name": "KITTIPOD",
-    "score": 179
-  },
-  {
-    "name": "dad\\",
-    "score": 220
-  },
-  {
-    "name": "K1ttonn",
-    "score": 182
-  },
-  {
-    "name": "ad",
-    "score": 220
-  },
-  {
-    "name": "dadw",
-    "score": 223
-  },
-  {
-    "name": "dasda",
-    "score": 234
-  },
-  {
-    "name": "dasddasdasd",
-    "score": 227
-  },
-  {
-    "name": "asdasd",
-    "score": 243
-  },
-  {
-    "name": "dasdas",
+    "name": "dad",
     "score": 216
-  },
-  {
-    "name": "Adek",
-    "score": 230
-  },
-  {
-    "name": "dasdadw",
-    "score": 213
   }
 ]
